@@ -18,18 +18,13 @@ public class MailSenderService {
     private String from;
     private final JavaMailSender mailSender;
 
-    @KafkaListener(topics = "${spring.kafka.topics.report}")
-    private void sendTaskReport(MailDto report) {
-        log.info("Received report for {}", report.recipientEmail());
+    @KafkaListener(topics = {
+            "${spring.kafka.topics.report}",
+            "${spring.kafka.topics.greeting}"
+    })
+    private void handleMailCreatedEvent(MailDto report) {
         sendMail(report.recipientEmail(), report.title(), report.content());
-        log.info("Daily task report for user {} has been sent", report.recipientEmail());
-    }
-
-    @KafkaListener(topics = "${spring.kafka.topics.greeting}")
-    private void sendGreeting(MailDto greeting) {
-        log.info("Received greeting for {}", greeting.recipientEmail());
-        sendMail(greeting.recipientEmail(), greeting.title(), greeting.content());
-        log.info("A welcome email has been sent to user {}", greeting.recipientEmail());
+        log.info("Email for user {} has been sent", report.recipientEmail());
     }
 
     private void sendMail(String to, String subject, String text) {
