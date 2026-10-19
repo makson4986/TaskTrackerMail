@@ -1,3 +1,29 @@
 spring:
   application:
     name: TaskTrackerMail
+  mail:
+    host: ${MAIL_HOST}
+    port: ${MAIL_PORT}
+    username: ${MAIL_USERNAME}
+    password: ${MAIL_PASSWORD}
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+    from: ${MAIL_FROM}
+  kafka:
+    bootstrap-servers: ${KAFKA_BROKER_URL}
+    consumer:
+      group-id: mailSenderGroup
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JacksonJsonDeserializer
+      properties:
+        spring.json.type.mapping: greeting:org.makson.tasktrackermail.dto.MailDto,report:org.makson.tasktrackermail.dto.MailDto
+    topics:
+      report: ${KAFKA_REPORT_TOPIC}
+      greeting: ${KAFKA_GREETING_TOPIC}
+
+
+
