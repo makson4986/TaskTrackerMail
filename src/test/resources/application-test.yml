@@ -1,0 +1,16 @@
+spring:
+  mail:
+    host: localhost
+    port: 587
+    username: username
+    password: password
+    from: from
+  kafka:
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JacksonJsonSerializer
+      properties:
+        spring.json.type.mapping: greeting:org.makson.tasktrackermail.dto.MailDto
+    topics:
+      report: EMAIL_SENDING_TASKS
+      greeting: GREETING_SENDING
