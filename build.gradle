@@ -1,12 +1,12 @@
 plugins {
     id 'java'
-    id 'org.springframework.boot' version '4.1.1'
-    id 'io.spring.dependency-management' version '1.1.7'
-    id 'io.freefair.lombok' version '9.2.0'
+    alias(libs.plugins.spring.boot)
+    alias(libs.plugins.spring.dependency.management)
+    alias(libs.plugins.lombok)
 }
 
 group = 'org.makson'
-version = '0.0.1-SNAPSHOT'
+version = '0.1.0'
 description = 'TaskTrackerMail'
 
 java {
@@ -25,9 +25,10 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-mail'
 
     testImplementation 'org.springframework.boot:spring-boot-starter-kafka-test'
-    testImplementation "org.springframework.boot:spring-boot-testcontainers"
-    testImplementation "org.testcontainers:testcontainers-kafka:2.0.1"
-    testImplementation "org.testcontainers:junit-jupiter:1.19.8"
+    testImplementation 'org.springframework.boot:spring-boot-testcontainers'
+    testImplementation 'org.testcontainers:testcontainers-kafka'
+    testImplementation 'org.testcontainers:testcontainers-junit-jupiter'
+
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 }
 
