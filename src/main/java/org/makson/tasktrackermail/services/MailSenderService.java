@@ -22,7 +22,7 @@ public class MailSenderService {
             "${spring.kafka.topics.report}",
             "${spring.kafka.topics.greeting}"
     })
-    private void handleMailCreatedEvent(MailDto report) {
+    public void handleMailCreatedEvent(MailDto report) {
         sendMail(report.recipientEmail(), report.title(), report.content());
         log.info("Email for user {} has been sent", report.recipientEmail());
     }
