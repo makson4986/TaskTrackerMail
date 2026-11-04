@@ -50,4 +50,4 @@ jobs:
         with:
           context: .
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/tasktrackermail:latest
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/task-tracker-mail:latest
