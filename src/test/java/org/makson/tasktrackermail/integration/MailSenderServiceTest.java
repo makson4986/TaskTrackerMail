@@ -4,6 +4,7 @@ import org.awaitility.Awaitility;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.makson.tasktrackermail.config.TestcontainersConfig;
 import org.makson.tasktrackermail.dto.MailDto;
 import org.makson.tasktrackermail.services.MailSenderService;
 import org.mockito.ArgumentCaptor;
@@ -11,23 +12,19 @@ import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.testcontainers.service.connection.ServiceConnection;
+import org.springframework.context.annotation.Import;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
-import org.testcontainers.junit.jupiter.Container;
-import org.testcontainers.kafka.KafkaContainer;
 
 import java.util.concurrent.TimeUnit;
 
 @SpringBootTest
 @ActiveProfiles("test")
+@Import(TestcontainersConfig.class)
 public class MailSenderServiceTest {
-    @Container
-    @ServiceConnection
-    static final KafkaContainer kafkaContainer = new KafkaContainer("apache/kafka-native:4.1.2");
     @MockitoBean
     JavaMailSender mailSender;
     final MailSenderService mailSenderService;
