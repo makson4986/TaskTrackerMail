@@ -11,6 +11,8 @@ spring:
       value-serializer: org.springframework.kafka.support.serializer.JacksonJsonSerializer
       properties:
         spring.json.type.mapping: greeting:org.makson.tasktrackermail.dto.MailDto
+    consumer:
+      auto-offset-reset: earliest
     topics:
       report: EMAIL_SENDING_TASKS
       greeting: GREETING_SENDING
